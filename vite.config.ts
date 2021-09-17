@@ -6,15 +6,15 @@ const { resolve } = require('path');
 export default defineConfig({
   resolve: {
     alias: [
-      // /@/xxxx => src/xxxx
+      // @/xxxx => src/xxxx
       {
-        find: /\/@\//,
-        replacement: resolve('src') + '/',
+        find: /@/,
+        replacement: resolve('src'),
       },
       // /#/xxxx => types/xxxx
       {
-        find: /\/#\//,
-        replacement: resolve('types') + '/',
+        find: /#/,
+        replacement: resolve('types'),
       },
     ],
   },

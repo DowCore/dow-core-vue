@@ -1,27 +1,24 @@
-// register vue composition api globally
-import { ViteSSG } from 'vite-ssg'
-import generatedRoutes from 'virtual:generated-pages'
-import { setupLayouts } from 'virtual:generated-layouts'
-import App from './App.vue'
+import '/@/design/index.less';
+import 'virtual:windi-base.css';
+import 'virtual:windi-components.css';
+import 'virtual:windi-utilities.css';
+// Register icon sprite
+import 'virtual:svg-icons-register';
+import App from './App.vue';
+import { createApp } from 'vue';
+// Importing on demand in local development will increase the number of browser requests by around 20%.
+// This may slow down the browser refresh speed.
+// Therefore, only enable on-demand importing in production environments .
+if (import.meta.env.DEV) {
+  import('ant-design-vue/dist/antd.less');
+}
 
-// windicss layers
-import 'virtual:windi-base.css'
-import 'virtual:windi-components.css'
-// your custom styles here
-import './styles/main.css'
-// windicss utilities should be the last style import
-import 'virtual:windi-utilities.css'
-// windicss devtools support (dev only)
-import 'virtual:windi-devtools'
+async function bootstrap() {
+  const app = createApp(App);
+  // https://next.router.vuejs.org/api/#isready
+  // await router.isReady();
 
-const routes = setupLayouts(generatedRoutes)
+  app.mount('#app');
+}
 
-// https://github.com/antfu/vite-ssg
-export const createApp = ViteSSG(
-  App,
-  { routes },
-  (ctx) => {
-    // install all modules under `modules/`
-    Object.values(import.meta.globEager('./modules/*.ts')).map(i => i.install?.(ctx))
-  },
-)
+bootstrap();
