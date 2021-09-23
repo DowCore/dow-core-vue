@@ -12,12 +12,13 @@ import { createApp } from 'vue';
 if (import.meta.env.DEV) {
   import('ant-design-vue/dist/antd.less');
 }
-
+import { createHead } from '@vueuse/head'
 async function bootstrap() {
   const app = createApp(App);
   // https://next.router.vuejs.org/api/#isready
   // await router.isReady();
-
+  const head=createHead()
+  app.use(head)
   app.mount('#app');
 }
 
