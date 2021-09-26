@@ -5,6 +5,7 @@ const { resolve } = require('path');
 import viteSvgIcons from 'vite-plugin-svg-icons';
 import path from 'path';
 import { generateModifyVars } from './build/generate/generateModifyVars';
+import PurgeIcons from 'vite-plugin-purge-icons'
 function pathResolve(dir: string) {
   return resolve(process.cwd(), '.', dir);
 }
@@ -36,6 +37,8 @@ export default defineConfig({
     iconDirs: [path.resolve(process.cwd(), 'src/icons')],
     // Specify symbolId format
     symbolId: 'icon-[dir]-[name]',
+  }),PurgeIcons({
+    /* PurgeIcons Options */
   })],
 
   css: {
