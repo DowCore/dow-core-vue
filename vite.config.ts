@@ -6,6 +6,9 @@ import viteSvgIcons from 'vite-plugin-svg-icons';
 import path from 'path';
 import { generateModifyVars } from './build/generate/generateModifyVars';
 import PurgeIcons from 'vite-plugin-purge-icons'
+import Pages from 'vite-plugin-pages';
+import Layouts from 'vite-plugin-vue-layouts';
+
 function pathResolve(dir: string) {
   return resolve(process.cwd(), '.', dir);
 }
@@ -32,7 +35,7 @@ export default defineConfig({
       },
     },
   },*/
-  plugins: [vue(), WindiCSS(),viteSvgIcons({
+  plugins: [vue(), WindiCSS(),Pages(), Layouts(),viteSvgIcons({
     // Specify the icon folder to be cached
     iconDirs: [path.resolve(process.cwd(), 'src/icons')],
     // Specify symbolId format
